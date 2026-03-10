@@ -10,8 +10,8 @@ class LoginPageLocators:
 
 class ProductPageLocators:
     ADD_TO_CARD_BTN = (By.CSS_SELECTOR, ".btn-add-to-basket")
-    ALERT_SUCCESS = (By.CSS_SELECTOR, ".alert-success:first-of-type")
-    ALERT_CARD_COST = (By.CSS_SELECTOR, ".alert-info")
-    PRODUCT_NAME = (By.CSS_SELECTOR, "h1")
+    ALERT_SUCCESS = (By.CSS_SELECTOR, ".alert-success:first-of-type strong")
+    ALERT_CARD_COST = (By.CSS_SELECTOR, ".alert-info strong")
+    H1 = (By.CSS_SELECTOR, "h1")
     PRODUCT_COST = (By.CSS_SELECTOR, ".product_main .price_color")
 
