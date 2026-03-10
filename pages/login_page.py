@@ -11,7 +11,7 @@ class LoginPage(BasePage):
     def should_be_login_url(self):
         # проверка на корректный url адрес
         current_url = self.browser.current_url
-        assert "login_invalid" in current_url, \
+        assert "login" in current_url, \
             f"Подстрока 'login' не найдена в URL. Текущий URL: {current_url}"
 
     def should_be_login_form(self):
