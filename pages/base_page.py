@@ -69,3 +69,7 @@ class BasePage():
     def should_be_card_link(self):
         assert self.is_element_present(*BasePageLocators.ADD_TO_CARD_LINK), \
             "Ссылка на страницу корзины не найдена"
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"

@@ -8,6 +8,31 @@ class LoginPage(BasePage):
         self.should_be_login_form()
         self.should_be_register_form()
 
+    def register_new_user(self, email, password):
+        self.should_be_login_url()
+        self.should_be_login_form()
+        assert self.is_element_present(*LoginPageLocators.REGISTER_EMAIL_INPUT), \
+            "Форма для имейла не найдена"
+        assert self.is_element_present(*LoginPageLocators.REGISTER_PASSWORD_INPUT), \
+            "Форма для заполнения пароля не найдена"
+        assert self.is_element_present(*LoginPageLocators.REGISTER_REPEAT_PASSWORD_INPUT), \
+            "Форма для повтора пароля не найдена"
+        assert self.is_element_present(*LoginPageLocators.REGISTER_BTN), \
+            "Кнопка подтверждения регистрации не найдена"
+
+        email_input = self.browser.find_element(*LoginPageLocators.REGISTER_EMAIL_INPUT)
+        email_input.send_keys(email)
+
+        password_input = self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD_INPUT)
+        password_input.send_keys(password)
+
+        password_repeat_input = self.browser.find_element(*LoginPageLocators.REGISTER_REPEAT_PASSWORD_INPUT)
+        password_repeat_input.send_keys(password)
+
+        register_btn = self.browser.find_element(*LoginPageLocators.REGISTER_BTN)
+        register_btn.click()
+
+
     def should_be_login_url(self):
         # проверка на корректный url адрес
         current_url = self.browser.current_url
@@ -23,3 +48,4 @@ class LoginPage(BasePage):
         # проверка, что есть форма регистрации на странице
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM), \
             "Форма регистрации отсутствует"
+
