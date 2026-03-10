@@ -15,6 +15,14 @@ class ProductPage(BasePage):
         self.should_be_massage_about_add_to_card(self.get_product_name())
         self.should_be_message_about_card_cost(self.get_product_cost())
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.ALERT_SUCCESS), \
+            "Сообщение об успешном добавлении появилось, хотя не должно было"
+
+    def should_success_message_disappear(self):
+        assert self.is_disappeared(*ProductPageLocators.ALERT_SUCCESS), \
+            "Сообщение об успешном добавлении не исчезло"
+
     def should_be_add_to_card_button(self):
         assert self.is_element_present(*ProductPageLocators.ADD_TO_CARD_BTN), \
             "Конпка добавления товара в корзину не найдена"
