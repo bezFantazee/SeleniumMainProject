@@ -58,4 +58,14 @@ class BasePage():
         link.click()
 
     def should_be_login_link(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), \
+            "Login link is not presented"
+
+    def go_to_card_page(self):
+        self.should_be_login_link()
+        link = self.browser.find_element(*BasePageLocators.ADD_TO_CARD_LINK)
+        link.click()
+
+    def should_be_card_link(self):
+        assert self.is_element_present(*BasePageLocators.ADD_TO_CARD_LINK), \
+            "Ссылка на страницу корзины не найдена"
