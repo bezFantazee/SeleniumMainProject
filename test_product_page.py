@@ -8,6 +8,7 @@ from selenium_main_project.SeleniumMainProject.pages.product_page import Product
 
 
 def test_guest_should_see_login_link_on_product_page(browser):
+    # проверка видимости ссылки логина на странице товара
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
     page.open()
@@ -16,6 +17,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
 
 @pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
+    # тест требует ручной проверки
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
     page.open()
@@ -25,6 +27,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
 class TestUserAddToBasketFromProductPage:
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
+        # автоскейп: регистрация пользователя перед каждым тестом в классе
         link ="http://selenium1py.pythonanywhere.com/ru/accounts/login/"
         page = LoginPage(browser, link)
         page.open()
@@ -33,6 +36,7 @@ class TestUserAddToBasketFromProductPage:
         page.register_new_user(email, password)
 
     def test_user_cant_see_success_message(self, browser):
+        # пользователь не видит сообщение об успешном добавлении без клика
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
         page = ProductPage(browser, link)
         page.open()
@@ -40,6 +44,7 @@ class TestUserAddToBasketFromProductPage:
 
     @pytest.mark.need_review
     def test_user_can_add_to_basket(self, browser):
+        # тест требует ручной проверки
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
         page = ProductPage(browser, link)
         page.open()
@@ -48,6 +53,7 @@ class TestUserAddToBasketFromProductPage:
 
 
 def test_guest_cant_see_success_message(browser):
+    # гость не видит сообщение об успешном добавлении без клика
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
     page.open()
@@ -56,6 +62,7 @@ def test_guest_cant_see_success_message(browser):
 
 @pytest.mark.need_review
 def test_guest_can_add_to_basket(browser):
+    # тест требует ручной проверки
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
     page.open()
@@ -65,6 +72,7 @@ def test_guest_can_add_to_basket(browser):
 
 @pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    # тест требует ручной проверки
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
     page.open()
@@ -76,6 +84,7 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 
 @pytest.mark.xfail
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+    # ожидаемо падающий тест: сообщение появляется после добавления
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
     page.open()
@@ -85,6 +94,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
 
 @pytest.mark.xfail
 def test_message_disappeared_after_adding_product_to_basket(browser):
+    # ожидаемо падающий тест: сообщение не исчезает
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
     page.open()

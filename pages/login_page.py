@@ -4,11 +4,13 @@ from .locators import LoginPageLocators
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
+        # комплексная проверка страницы логина
         self.should_be_login_url()
         self.should_be_login_form()
         self.should_be_register_form()
 
     def register_new_user(self, email, password):
+        # регистрация нового пользователя с заполнением всех полей
         self.should_be_login_url()
         self.should_be_login_form()
         assert self.is_element_present(*LoginPageLocators.REGISTER_EMAIL_INPUT), \

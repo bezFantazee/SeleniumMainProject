@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 
 
 def pytest_addoption(parser):
+    # регистрация кастомного аргумента для выбора языка
     parser.addoption(
         "--language",
         action="store",
@@ -16,6 +17,7 @@ def pytest_addoption(parser):
 def browser(request):
     user_language = request.config.getoption("--language")
     options = Options()
+    # настройка языка браузера через экспериментальную опцию
     options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
     print("\nstart browser for test..")
     browser = webdriver.Chrome(options=options)

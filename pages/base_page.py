@@ -17,6 +17,7 @@ class BasePage():
         self.browser.get(self.url)
 
     def is_element_present(self, how, what):
+        # проверка видимости элемента без ожидания
         try:
             self.browser.find_element(how, what)
         except (NoSuchElementException):
@@ -24,6 +25,7 @@ class BasePage():
         return True
 
     def is_not_element_present(self, how, what, timeout=4):
+        # элемент не должен появиться в течение timeout
         try:
             not WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
@@ -31,6 +33,7 @@ class BasePage():
         return False
 
     def is_disappeared(self, how, what, timeout=4):
+        # элемент должен исчезнуть в течение timeout
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException). \
                 until_not(EC.presence_of_element_located((how, what)))
@@ -40,6 +43,7 @@ class BasePage():
         return True
 
     def solve_quiz_and_get_code(self):
+        # решение математического квеста из alert
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))

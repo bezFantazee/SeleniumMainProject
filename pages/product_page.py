@@ -9,6 +9,7 @@ from selenium_main_project.SeleniumMainProject.pages.locators import ProductPage
 
 class ProductPage(BasePage):
     def add_to_basket(self):
+        # полный сценарий добавления товара в корзину
         self.should_be_add_to_basket_button()
         self.click_to_add_to_basket_button()
         self.solve_quiz_and_get_code()#вычисление математического выражения
@@ -16,10 +17,12 @@ class ProductPage(BasePage):
         self.should_be_message_about_basket_cost(self.get_product_cost())
 
     def should_not_be_success_message(self):
+        # проверка отсутствия сообщения об успешном добавлении
         assert self.is_not_element_present(*ProductPageLocators.ALERT_SUCCESS), \
             "Сообщение об успешном добавлении появилось, хотя не должно было"
 
     def should_success_message_disappear(self):
+        # проверка исчезновения сообщения после добавления
         assert self.is_disappeared(*ProductPageLocators.ALERT_SUCCESS), \
             "Сообщение об успешном добавлении не исчезло"
 
@@ -32,16 +35,19 @@ class ProductPage(BasePage):
         button.click()
 
     def get_product_name(self):
+        # получение названия товара из заголовка
         assert self.is_element_present(*ProductPageLocators.H1), \
             "Название товара не найдено"
         return self.browser.find_elements(*ProductPageLocators.H1)[-1].text
 
     def get_product_cost(self):
+        # получение цены товара
         assert self.is_element_present(*ProductPageLocators.PRODUCT_COST), \
             "Цена товара не найдена"
         return self.browser.find_element(*ProductPageLocators.PRODUCT_COST).text
 
     def should_be_massage_about_add_to_basket(self, product_name):
+        # проверка сообщения с названием товара
         assert self.is_element_present(*ProductPageLocators.ALERT_SUCCESS), \
             "Сообщение об успешном добавлении товара не найдено"
 
@@ -49,6 +55,7 @@ class ProductPage(BasePage):
         assert product_name == message, f"В сообщении, об успешном добавлении, не содержится имя товара. Имя товара {product_name}, Сообщение {message}"
 
     def should_be_message_about_basket_cost(self, product_cost):
+        # проверка сообщения со стоимостью корзины
         assert self.is_element_present(*ProductPageLocators.ALERT_BASKET_COST), \
             "Сообщение о стоимости корзины не найдено"
         message = self.browser.find_element(*ProductPageLocators.ALERT_BASKET_COST).text
